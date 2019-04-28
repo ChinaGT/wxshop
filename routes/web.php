@@ -81,3 +81,8 @@ route::any('docodes','Demo\DemoController@docodes');
 route::get('wxbd','Demo\DemoController@wxbd');
 route::post('dowxbd','Demo\DemoController@dowxbd');
 
+
+
+route::any('codelogin/{id}','User\UserController@wxcodelogin');
+route::any('createcode','QrcodeController@qrcode');
+

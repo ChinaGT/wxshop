@@ -250,4 +250,15 @@ class UserController extends Controller
         return redirect('login');
     }
 
+
+    public function wxlogin(Request $request)
+    {
+        $code = $request->code;
+    }
+    
+
+    public function wxcodelogin($id){
+        echo $id;
+    }
+
 }
