@@ -11,7 +11,7 @@ class QrcodeController extends Controller
         include public_path()."/phpqrcode.php";
         $userid = md5(time());
         //dd($userid);
-        $value = "http://www.wxshop.com/codelogin/".$userid;
+        $value = "http://gt.zty77.com/codelogin/".$userid;
         \QRcode::png($value,'qrcode.png');
         return view('user.wxcode');
     }
