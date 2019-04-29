@@ -256,6 +256,7 @@ class UserController extends Controller
     {
         $code = $request->code;
         $userid = $request->state;
+        print_r($userid);die;
         $appid = env('WXAPPID');
         $appscript = env('WXAPPSECRET');
         $token_url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=$appid&secret=$appscript&code=$code&grant_type=authorization_code";
