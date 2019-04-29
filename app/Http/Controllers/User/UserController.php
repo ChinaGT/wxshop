@@ -262,7 +262,8 @@ class UserController extends Controller
         $token_url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=$appid&secret=$appscript&code=$code&grant_type=authorization_code";
         $json_token = file_get_contents($token_url);
         $json_token=json_decode($json_token,true);
-        $token = $json_token->access_token;
+        print_r($json_token);die;
+        $token = $json_token['access_token'];
         $openid = $json_token['openid'];
         //print_r($token);die;
         //print_r($openid);die;
