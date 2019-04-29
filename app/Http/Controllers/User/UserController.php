@@ -264,7 +264,7 @@ class UserController extends Controller
         $json_token=json_decode($json_token,true);
         $token = $json_token['access_token'];
         $openid = $json_token['openid'];
-        print_r($token);die;
+        //print_r($token);die;
         //print_r($openid);die;
         $user_url = "https://api.weixin.qq.com/sns/userinfo?access_token=$token&openid=$openid&lang=zh_CN";
         $info = json_decode(file_get_contents($user_url),true);
