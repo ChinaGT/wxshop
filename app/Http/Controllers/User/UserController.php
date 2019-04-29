@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Requests\Register;
 use App\Http\Controllers\Controller;
+use App\Model\Ticket;
 use App\Model\User;
 use App\Tools\Captcha;
 use Illuminate\Http\Request;
@@ -254,6 +255,24 @@ class UserController extends Controller
     public function wxlogin(Request $request)
     {
         $code = $request->code;
+        $userid = $request->state;
+        $appid = env('WXAPPID');
+        $appscript = env('WXAPPSECRET');
+        $token_url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=$appid&secret=$appscript&code=$code&grant_type=authorization_code";
+        $json_token = file_get_contents($token_url);
+        $token = json_decode($json_token,true)['access_token'];
+        $openid = json_decode($json_token,true)['openid'];
+        $user_url = "https://api.weixin.qq.com/sns/userinfo?access_token=$token&openid=$openid&lang=zh_CN";
+        $info = json_decode(file_get_contents($user_url),true);
+        $data =[
+            'userid'=>$userid,
+            'openid'=>$info['openid'],
+            'status'=>2
+        ];
+        $ticket = new Ticket();
+        $res = $ticket->insert($ticket);
+        return view('user.wxlogin',['user_info'=>$info]);
+
     }
     
 
@@ -261,7 +280,8 @@ class UserController extends Controller
         $appid = env('WXAPPID');
         $redirect_uri = urlencode("http://gt.zty77.com/wxlogin");
         $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=$appid&redirect_uri=$redirect_uri&response_type=code&scope=SCOPE&state=$id#wechat_redirect";
-        dd($url);
+        return redirect($url);
+        //dd($url);
     }
 
 }
