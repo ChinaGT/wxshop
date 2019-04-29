@@ -279,7 +279,7 @@ class UserController extends Controller
     public function wxcodelogin($id){
         $appid = env('WXAPPID');
         $redirect_uri = urlencode("http://gt.zty77.com/wxlogin");
-        $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=$appid&redirect_uri=$redirect_uri&response_type=code&scope=SCOPE&state=$id#wechat_redirect";
+        $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=$appid&redirect_uri=$redirect_uri&response_type=code&scope=snsapi_userinfo&state=$id#wechat_redirect";
         return redirect($url);
         //dd($url);
     }
