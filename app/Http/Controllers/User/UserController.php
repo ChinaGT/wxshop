@@ -260,7 +260,7 @@ class UserController extends Controller
         $appscript = env('WXAPPSECRET');
         $token_url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=$appid&secret=$appscript&code=$code&grant_type=authorization_code";
         $json_token = file_get_contents($token_url);
-        dd($json_token);
+        //dd($json_token);
         $token = json_decode($json_token,true)['access_token'];
         $openid = json_decode($json_token,true)['openid'];
         $user_url = "https://api.weixin.qq.com/sns/userinfo?access_token=$token&openid=$openid&lang=zh_CN";
